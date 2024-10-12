@@ -94,18 +94,13 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     box: {
-        backgroundColor: '#ffffff', // White background for the box
-        borderRadius: 10, // Rounded corners
-        borderColor: '#f83e3e', // Border color matching the theme
-        borderWidth: 2, // Border thickness
-        padding: 15, // Padding inside the box
-        marginBottom: 15, // Space between boxes
-        shadowColor: '#000', // Shadow for the cute box effect
-        shadowOffset: { width: 0, height: 2 }, // Shadow offset for depth
-        shadowOpacity: 0.2, // Shadow opacity
-        shadowRadius: 4, // Shadow radius for the soft shadow effect
-        elevation: 3, // Elevation for Android shadow
-    },    
+        borderBottomWidth: 1,
+        borderBottomColor: '#f83e3e', // Red line at the bottom
+        paddingVertical: 10,
+        paddingHorizontal: 0, // Add padding to shift the content slightly away from the edge
+        marginBottom: 15,
+        width: '100%', // Make sure the red line spans full width
+    }, 
     menuIcon: {
         position: 'absolute',
         top: 50,
@@ -135,14 +130,14 @@ const styles = StyleSheet.create({
         color: '#000000',
     },
     userEmail: {
-        fontSize: 15,
+        fontSize: 13,
         color: '#7f7f7f', // Gray text
         marginBottom: 5,
     },
     userRole: {
         fontSize: 18,
         color: '#000000',
-        marginBottom: 10,
+        marginBottom: 40,
     },
     userLocation: {
         fontSize: 16,
@@ -158,7 +153,6 @@ const styles = StyleSheet.create({
     certificationsList: {
         alignSelf: 'flex-start', // Shift the certifications to the left
         marginBottom: 20,
-        borderBottomWidth: 1,
     },
     medicalEquipmentTitle: {
         fontSize: 18,

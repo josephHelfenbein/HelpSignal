@@ -1,18 +1,27 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router'; // Import router
 
 const SpeakScreen = () => {
   const handlePress = () => {
-    // Handle the microphone button press
-    console.log('Microphone pressed!'); // Add functionality here
+    console.log('Microphone pressed!');
+  };
+
+  const handleBackPress = () => {
+    // Use router.push() to navigate back to the SOS screen
+    router.push('/index'); // Ensure that the SOS screen's file path is correct
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Press the microphone to speak:</Text> {/* Keep original text */}
+      <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
+        <Ionicons name="arrow-back" size={24} color="black" />
+      </TouchableOpacity>
+
+      <Text style={styles.text}>Press the microphone to speak:</Text>
       <TouchableOpacity onPress={handlePress} style={styles.microphoneButton}>
-        <Ionicons name="mic" size={100} color="white" /> {/* Microphone icon */}
+        <Ionicons name="mic" size={100} color="white" />
       </TouchableOpacity>
     </View>
   );
@@ -23,19 +32,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff', // Adjust the background color as needed
+    backgroundColor: '#fff',
   },
   text: {
     fontSize: 24,
-    marginBottom: 20, // Spacing between text and microphone button
+    marginBottom: 20,
   },
   microphoneButton: {
     width: 100,
     height: 100,
-    borderRadius: 50, // Make it circular
-    backgroundColor: 'red', // Background color of the button
+    borderRadius: 50,
+    backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  backButton: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+    padding: 10,
   },
 });
 
