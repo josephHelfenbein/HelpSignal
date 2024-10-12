@@ -10,7 +10,7 @@ const SpeakScreen = () => {
 
   const handleBackPress = () => {
     // Use router.push() to navigate back to the SOS screen
-    router.push('/index'); // Ensure that the SOS screen's file path is correct
+    router.push('/'); // Ensure that the SOS screen's file path is correct
   };
 
   return (
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: 'absolute',
-    top: 10,
+    top: 50,
     left: 10,
     padding: 10,
   },

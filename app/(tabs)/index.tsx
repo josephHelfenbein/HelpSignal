@@ -16,7 +16,7 @@ const SOSScreen = () => {
   };
 
   const getRandomPulseCount = () => {
-    return 3; // Generates a number between 2 and 4
+    return 3 // Generates a number between 2 and 4
   };
 
   const startPulsing = (pulseCount: number) => {
@@ -24,12 +24,12 @@ const SOSScreen = () => {
       Animated.sequence([
         Animated.timing(pulseAnimation, {
           toValue: 1.2, // Scale up
-          duration: 300,
+          duration: 400,
           useNativeDriver: true,
         }),
         Animated.timing(pulseAnimation, {
           toValue: 1, // Scale down
-          duration: 300,
+          duration: 400,
           useNativeDriver: true,
         }),
       ]),
@@ -46,32 +46,41 @@ const SOSScreen = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={handlePress}>
-        <Animated.View style={[styles.button, { transform: [{ scale: pulseAnimation }] }]}>
-          <Text style={styles.buttonText}>SOS</Text>
-        </Animated.View>
-      </TouchableOpacity>
+      <Text style={styles.emergency}>EMERGENCY CALL</Text>
+      <View>
+        <TouchableOpacity onPress={handlePress}>
+          <Animated.View style={[styles.button, { transform: [{ scale: pulseAnimation }] }]}>
+            <Text style={styles.buttonText}>S.O.S</Text>
+          </Animated.View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  emergency: {
+    color: '#f80000',
+    fontWeight: 'bold',
+    fontSize: 40,
+  },
   container: {
+    marginBottom: 200,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   button: {
-    width: 150,
-    height: 150,
-    borderRadius: 75, // Make it circular
+    width: 325,
+    height: 325,
+    borderRadius: 200, // Make it circular
     backgroundColor: 'red', // Change to desired background color
     justifyContent: 'center',
     alignItems: 'center',
   },
   buttonText: {
     color: 'white',
-    fontSize: 30,
+    fontSize: 50,
     fontWeight: 'bold',
   },
 });
