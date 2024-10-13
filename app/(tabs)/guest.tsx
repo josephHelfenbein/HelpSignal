@@ -1,37 +1,45 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Modal } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native'; // Import useNavigation
+import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Guest() {
   const [isLogin, setIsLogin] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false); // New state for Sign Up
-  const navigation = useNavigation<any>(); // Get the navigation object
-
-  // New state for additional fields
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [email, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
   const [firstName, setFirstName] = useState(''); // First Name state
   const [lastName, setLastName] = useState('');   // Last Name state
-  const [dobDay, setDobDay] = useState('');       // Day state
-  const [dobMonth, setDobMonth] = useState('');    // Month state
-  const [dobYear, setDobYear] = useState('');      // Year state
+
+  const axiosConfig = axios.create({
+    baseURL: "https://2024-hackharvard-flask.vercel.app/api/",
+    headers: {
+      "Content-Type": "application/json",
+    }
+  });
+
+  const navigation = useNavigation(); // Get the navigation object
 
   const handleLoginPress = () => {
     setIsLogin(true);
     setIsSignUp(false);
+    // Handle login logic here...
   };
 
   const handleSignUpPress = () => {
     setIsSignUp(true);
     setIsLogin(false);
+    // Handle signup logic here...
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.settingsButton} onPress={() => navigation.navigate('skills')}>
-        <Ionicons name="settings" size={30} style={styles.settingsIcon} />
-      </TouchableOpacity>
+      {/* <TouchableOpacity style={styles.settingsButton} onPress={() => navigation.navigate('skills')}>
+                <Ionicons name="settings" size={30} style={styles.settingsIcon} />
+            </TouchableOpacity> */}
 
       <ParallaxScrollView
         headerBackgroundColor={{ light: '#f83e3e', dark: '#f83e3e' }}
@@ -53,95 +61,72 @@ export default function Guest() {
               </TouchableOpacity>
             </View>
           )}
-
-          {/* Login Form */}
+          {/* Log In Form */}
           {isLogin && (
             <View style={styles.formContainer}>
-              <TextInput style={styles.input} placeholder="Email" keyboardType="email-address" />
-              <TextInput style={styles.input} placeholder="Password" secureTextEntry />
-              <TouchableOpacity style={styles.loginButton}>
-                <Text style={styles.buttonText}>Login</Text>
-              </TouchableOpacity>
-              <Text style={styles.orText}>OR</Text>
-              <TouchableOpacity style={styles.signupButton} onPress={handleSignUpPress}>
-                <Text style={styles.buttonText}>Sign Up</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-
-          {/* Sign Up Form */}
-          {isSignUp && (
-            <View style={styles.formContainer}>
-              <View style={styles.nameContainer}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="First Name"
-                  value={firstName}
-                  onChangeText={setFirstName}
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Last Name"
-                  value={lastName}
-                  onChangeText={setLastName}
-                />
-              </View>
               <TextInput
                 style={styles.input}
                 placeholder="Email"
+                value={email}
+                onChangeText={setUsername}
                 keyboardType="email-address"
               />
               <TextInput
                 style={styles.input}
                 placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+              />
+              <TouchableOpacity style={styles.loginButton} onPress={handleLoginPress}>
+                <Text style={styles.buttonText}>Login</Text>
+              </TouchableOpacity>
+              <Text style={styles.orText}>OR</Text>
+              <TouchableOpacity style={styles.signupButton} onPress={() => setIsSignUp(true)}>
+                <Text style={styles.buttonText}>Sign Up</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          {/* Sign Up Form */}
+          {isSignUp && (
+            <View style={styles.formContainer}>
+
+              <TextInput
+                style={styles.input}
+                placeholder="First Name"
+                value={firstName}
+                onChangeText={setFirstName}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Last Name"
+                value={lastName}
+                onChangeText={setLastName}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Email"
+                value={email}
+                onChangeText={setUsername}
+                keyboardType="email-address"
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
                 secureTextEntry
               />
               <TextInput
                 style={styles.input}
                 placeholder="Confirm Password"
+                value={password2}
+                onChangeText={setPassword2}
                 secureTextEntry
               />
-              <View style={styles.dobContainer}>
-                <Picker
-                  selectedValue={dobDay}
-                  style={styles.picker}
-                  onValueChange={(itemValue: React.SetStateAction<string>) => setDobDay(itemValue)}
-                >
-                  <Picker.Item label="DD" value="" />
-                  {/* Add options for days 1-31 */}
-                  {[...Array(31)].map((_, i) => (
-                    <Picker.Item key={i} label={`${i + 1}`} value={`${i + 1}`} />
-                  ))}
-                </Picker>
-                <Picker
-                  selectedValue={dobMonth}
-                  style={styles.picker}
-                  onValueChange={(itemValue: React.SetStateAction<string>) => setDobMonth(itemValue)}
-                >
-                  <Picker.Item label="MM" value="" />
-                  {/* Add options for months 1-12 */}
-                  {[...Array(12)].map((_, i) => (
-                    <Picker.Item key={i} label={`${i + 1}`} value={`${i + 1}`} />
-                  ))}
-                </Picker>
-                <Picker
-                  selectedValue={dobYear}
-                  style={styles.picker}
-                  onValueChange={(itemValue: React.SetStateAction<string>) => setDobYear(itemValue)}
-                >
-                  <Picker.Item label="YYYY" value="" />
-                  {/* Add options for years, e.g., 1900 to the current year */}
-                  {Array.from({ length: new Date().getFullYear() - 1900 + 1 }, (_, i) => (
-                    <Picker.Item key={i} label={`${new Date().getFullYear() - i}`} value={`${1900 + i}`} />
-                  ))}
-                </Picker>
-              </View>
+
               <TouchableOpacity style={styles.signupButton}>
                 <Text style={styles.buttonText}>Sign Up</Text>
-              </TouchableOpacity>
-              <Text style={styles.orText}>OR</Text>
-              <TouchableOpacity style={styles.loginButton} onPress={handleLoginPress}>
-                <Text style={styles.buttonText}>Login</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -160,59 +145,58 @@ const styles = StyleSheet.create({
     height: 180,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f83e3e', // Red header background
-    position: 'relative',
+    backgroundColor: '#f83e3e',
   },
   settingsIcon: {
-    color: '#ffffff', // White icon
+    color: '#ffffff',
   },
   settingsButton: {
     position: 'absolute',
     top: 50,
     right: 20,
     zIndex: 10,
-    color: '#ffffff', // White icon
+    color: '#ffffff',
   },
   headerImage: {
     top: 70,
-    color: '#ffffff', // White user icon
+    color: '#ffffff',
   },
   contentContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 0, // Adjust margin to move buttons down
+    marginTop: 0,
   },
   buttonContainer: {
-    marginTop: 20, // Adjust margin to move buttons down the page
+    marginTop: 20,
   },
   loginButton: {
-    backgroundColor: '#f83e3e', // Red color for the button
+    backgroundColor: '#f83e3e',
     paddingVertical: 10,
     paddingHorizontal: 50,
     borderRadius: 5,
     marginBottom: 50,
-    justifyContent: 'center', // Center the content vertically
-    alignItems: 'center', // Center the content horizontally
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   signupButton: {
-    backgroundColor: '#00aaff', // Blue color for the button
+    backgroundColor: '#00aaff',
     paddingVertical: 10,
     paddingHorizontal: 50,
     borderRadius: 5,
-    justifyContent: 'center', // Center the content vertically
-    alignItems: 'center', // Center the content horizontally
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText: {
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
-    textAlign: 'center', // Make sure the text itself is centered
+    textAlign: 'center',
   },
   formContainer: {
     width: '80%',
     alignItems: 'center',
-    marginTop: 10, // Optional: Add some margin at the top of the form
+    marginTop: 10,
   },
   input: {
     width: '100%',
@@ -223,29 +207,25 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     marginTop: 5,
     borderRadius: 5,
+    justifyContent: 'center',
   },
-  orText: {
-    marginVertical: 20,
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#7f7f7f',
+  calendarModal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
-  nameContainer: { // New style for the name input fields
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  dobContainer: { // New style for the date of birth fields
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginBottom: 15, // Optional: Add space below the DOB fields
-  },
-  picker: {
-    height: 40,
-    width: '30%', // Adjust width as needed
-    borderColor: '#ccc',
-    borderWidth: 1,
+  closeButton: {
+    backgroundColor: '#f83e3e',
+    padding: 10,
     borderRadius: 5,
+    marginTop: 10,
   },
+  orText: { marginVertical: 20, fontSize: 16, fontWeight: 'bold', color: '#7f7f7f' },
+  nameContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  label: { fontSize: 16, fontWeight: 'bold', marginBottom: 10 },
 });

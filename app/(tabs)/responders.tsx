@@ -1,9 +1,9 @@
 import { StyleSheet, View, Text } from 'react-native';
+import MapView from 'react-native-maps';
 
 export default function Responders() {
-    return ( 
+    return (
         <View style={styles.container}>
-
             <Text style={styles.sos}>S.O.S Patient</Text>
 
             <View style={styles.infoContainer}>
@@ -21,16 +21,23 @@ export default function Responders() {
                 </View>
             </View>
 
-            <View>
-
-            </View>
+            {/* Map with custom dimensions */}
+            <MapView
+                style={styles.map} // Custom style to control the map size
+                initialRegion={{
+                    latitude: 42.38312,
+                    longitude: -71.12595,
+                    latitudeDelta: 0.01,
+                    longitudeDelta: 0.01,
+                }}
+            />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 2,
+        flex: 1, // Adjust to flex the whole screen
         justifyContent: 'center',
         alignItems: 'center',
         padding: 40,
@@ -52,6 +59,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 5,
         elevation: 5, // For Android shadow
+        marginBottom: 20,
     },
     infoRow: {
         flexDirection: 'row',
@@ -65,7 +73,12 @@ const styles = StyleSheet.create({
     },
     info: {
         fontSize: 18,
-        color: '#000000', // Brownish color for info
+        color: '#000000', // Black color for info
         fontWeight: '400',
+    },
+    map: {
+        width: '100%', // Set the width of the map
+        height: 300, // Set the height of the map
+        borderRadius: 10, // Optional: round the corners of the map
     },
 });
