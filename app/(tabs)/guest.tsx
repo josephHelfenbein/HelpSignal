@@ -13,6 +13,7 @@ export default function Guest() {
 	const [email, setUsername] = useState('');
 	const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
+    let doubleClick = -1;
 
 	const axiosConfig = axios.create({
 		baseURL: "https://2024-hackharvard-flask.vercel.app/api/",
@@ -32,11 +33,16 @@ export default function Guest() {
         setIsLogin(true);
         setIsSignUp(false);
 
+        if (doubleClick != 0) {
+            doubleClick = 0;
+            return;
+        }
+
         if (!email.includes('@')) {
             alert("Invalid email\n")
             return;
         }
-    
+        
         axiosConfig.post('/login', {
             "email": email,
             "password": SHA256(password).toString()
@@ -53,6 +59,11 @@ export default function Guest() {
     const handleSignUpPress = () => {
         setIsSignUp(true);
         setIsLogin(false);
+
+        if (doubleClick != 1) {
+            doubleClick = 1;
+            return;
+        }
 
         let msg = "";
         let invalid = false;
