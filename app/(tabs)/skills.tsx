@@ -2,50 +2,90 @@ import React, { useState } from 'react';
 import { View, Button, Text } from 'react-native';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
-interface MedicalEquipment {
+interface Item {
     name: string;
-    details: string;
+    details?: string;
 }
 
 export default function Skills() {
-    // State to track the selected checkboxes
-    const [selectedItems, setSelectedItems] = useState<MedicalEquipment[]>([]);
+    // State to track the selected certifications and medical equipment
+    const [selectedCertifications, setSelectedCertifications] = useState<Item[]>([]);
+    const [selectedMedicalEquipment, setSelectedMedicalEquipment] = useState<Item[]>([]);
 
-    // Sample list of medical equipment items (checkbox labels)
-    const medicalEquipmentList: MedicalEquipment[] = [
-        { name: 'EPIPen', details: 'Emergency epinephrine injection for severe allergic reactions' },
-        { name: 'Inhaler', details: 'Device delivering medication to alleviate breathing issues' },
-        { name: 'Portable Oxygen Concentrator', details: 'Portable device providing supplemental oxygen therapy' }
+    // Sample list of certifications
+    const certificationList: Item[] = [
+        { name: 'CPR (Cardiopulmonary Resuscitation)', details: 'Basic life-saving technique' },
+        { name: 'First Aid', details: 'Basic care for injuries and sudden illness' },
+        { name: 'Basic Life Support', details: 'Advanced CPR techniques' },
+        { name: 'Automated External Defibrillator (AED)', details: 'Using an AED for cardiac arrest' },
+        { name: 'Stop the Bleed', details: 'Emergency blood loss control' },
+        { name: 'Mental Health First Aid', details: 'Assisting individuals experiencing mental health issues' },
     ];
 
-    // Function to handle checkbox selection/deselection
-    const handleCheckboxChange = (isChecked: boolean, item: MedicalEquipment) => {
+    // Sample list of medical equipment
+    const medicalEquipmentList: Item[] = [
+        { name: 'EPIPen', details: 'Emergency epinephrine injection for severe allergic reactions' },
+        { name: 'Inhaler', details: 'Device delivering medication to alleviate breathing issues' },
+        { name: 'Portable Oxygen Concentrator', details: 'Portable device providing supplemental oxygen therapy' },
+        { name: 'Emergency Glucagon Kit', details: 'Glucagon injection for severe low blood sugar' },
+        { name: 'Blood Pressure Monitor', details: 'Device to measure blood pressure' },
+        { name: 'Blood Glucose Monitor', details: 'Device to measure blood sugar levels' }
+    ];
+
+    // Function to handle checkbox selection/deselection for certifications
+    const handleCertificationChange = (isChecked: boolean, item: Item) => {
         if (isChecked) {
-            // Add selected item to the state
-            setSelectedItems([...selectedItems, item]);
+            setSelectedCertifications([...selectedCertifications, item]);
         } else {
-            // Remove unselected item from the state
-            setSelectedItems(selectedItems.filter(i => i.name !== item.name));
+            setSelectedCertifications(selectedCertifications.filter(i => i.name !== item.name));
         }
     };
 
-    // Function to submit the selected items as a JSON string
+    // Function to handle checkbox selection/deselection for medical equipment
+    const handleMedicalEquipmentChange = (isChecked: boolean, item: Item) => {
+        if (isChecked) {
+            setSelectedMedicalEquipment([...selectedMedicalEquipment, item]);
+        } else {
+            setSelectedMedicalEquipment(selectedMedicalEquipment.filter(i => i.name !== item.name));
+        }
+    };
+
+    // Function to submit the selected certifications and medical equipment as a JSON string
     const handleSubmit = () => {
-        const jsonString = JSON.stringify(selectedItems);
-        console.log(jsonString); // Here you can send the jsonString to the backend
-        // Example: make a POST request to the server with the jsonString
-        // fetch('/submit', { method: 'POST', body: jsonString });
+        const data = {
+            certifications: selectedCertifications,
+            medicalEquipment: selectedMedicalEquipment,
+        };
+        const jsonString = JSON.stringify(data);
+        console.log(jsonString); // Send jsonString to the backend
+        // Example: fetch('/submit', { method: 'POST', body: jsonString });
     };
 
     return (
         <View style={{ padding: 20 }}>
-            <Text>Select your medical equipment:</Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Certifications</Text>
+            {certificationList.map((item, index) => (
+                <BouncyCheckbox
+                    key={index}
+                    text={item.name}
+                    onPress={(isChecked: boolean) => handleCertificationChange(isChecked, item)}
+                    fillColor="red"  // Red tick color
+                    disableBuiltInState={true}  // Prevent text cross out
+                    unfillColor="#FFFFFF"  // Unselected box background
+                    textStyle={{ textDecorationLine: 'none' }}  // Prevent crossing out the text
+                />
+            ))}
 
+            <Text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 20 }}>Medical Equipment</Text>
             {medicalEquipmentList.map((item, index) => (
                 <BouncyCheckbox
                     key={index}
                     text={item.name}
-                    onPress={(isChecked: boolean) => handleCheckboxChange(isChecked, item)} // Add explicit type for isChecked
+                    onPress={(isChecked: boolean) => handleMedicalEquipmentChange(isChecked, item)}
+                    fillColor="red"  // Red tick color
+                    // disableBuiltInState={true}  // Prevent text cross out
+                    // unfillColor="#FFFFFF"  // Unselected box background
+                    textStyle={{ textDecorationLine: 'none' }}  // Prevent crossing out the text
                 />
             ))}
 
