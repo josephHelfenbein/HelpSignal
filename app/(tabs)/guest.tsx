@@ -3,10 +3,23 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-nativ
 import {Picker} from '@react-native-picker/picker';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SHA256 } from 'crypto-js';
 
 export default function Guest() {
-  const [isLogin, setIsLogin] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false); // New state for Sign Up
+    const [isLogin, setIsLogin] = useState(false);
+    const [isSignUp, setIsSignUp] = useState(false);
+	const [email, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+    const [password2, setPassword2] = useState('');
+
+	const axiosConfig = axios.create({
+		baseURL: "https://2024-hackharvard-flask.vercel.app/api/",
+		headers: {
+			"Content-Type": "application/json",
+		}
+	});
 
     // New state for additional fields
     const [firstName, setFirstName] = useState(''); // First Name state
@@ -18,11 +31,116 @@ export default function Guest() {
     const handleLoginPress = () => {
         setIsLogin(true);
         setIsSignUp(false);
+
+        const handleLogin = () => {
+            if (!email.includes('@')) {
+                alert("Invalid email\n")
+                return;
+            }
+        
+            axiosConfig.post('/login', {
+                "email": email,
+                "password": SHA256(password).toString()
+            }).then((response) => {
+                let token = response.data.token;
+                let user = response.data.user;
+                AsyncStorage.setItem('token', token);
+                AsyncStorage.setItem('user', user);
+            }).catch((error) => {
+                console.log(error);
+            })
+        }
     };
 
     const handleSignUpPress = () => {
         setIsSignUp(true);
         setIsLogin(false);
+
+        const handleSignUp = () => {
+            let msg = "";
+            let invalid = false;
+            if (email.includes('@') === false) {
+                invalid = true;
+                msg += "Invalid email\n";
+            }
+    
+            let passwordMessage = "";
+            let firstPasswordInvalid = false;
+    
+            if (password.length < 8) {
+                invalid = true;
+                if (firstPasswordInvalid === false) {
+                    passwordMessage += "Password must be at least 8 characters long";
+                    firstPasswordInvalid = true;
+                }
+            }
+    
+            if (password.search(/[a-z]/) < 0) {
+                invalid = true;
+                if (firstPasswordInvalid === false) {
+                    passwordMessage += "Password must contain at least one lowercase letter";
+                    firstPasswordInvalid = true;
+                }
+                else {
+                    passwordMessage += ", one lowercase letter";
+                }
+            }
+    
+            if (password.search(/[A-Z]/) < 0) {
+                invalid = true;
+                if (firstPasswordInvalid === false) {
+                    passwordMessage += "Password must contain at least one uppercase letter";
+                    firstPasswordInvalid = true;
+                }
+                else {
+                    passwordMessage += ", one uppercase letter";
+                }
+            }
+    
+            if (password.search(/[0-9]/) < 0) {
+                invalid = true;
+                if (firstPasswordInvalid === false) {
+                    passwordMessage += "Password must contain at least one number";
+                    firstPasswordInvalid = true;
+                }
+                else {
+                    passwordMessage += ", one number";
+                }
+            }
+    
+            if (password.search(/[^a-zA-Z0-9]/) < 0) {
+                invalid = true;
+                if (firstPasswordInvalid === false) {
+                    passwordMessage += "Password must contain at least one special character";
+                    firstPasswordInvalid = true;
+                }
+                else {
+                    passwordMessage += ", one special character";
+                }
+            }
+            
+            if (!invalid && password !== password2) {
+                invalid = true;
+                msg += "Passwords do not match\n";
+            }
+
+            if (invalid) {
+                alert(msg + "\n" + passwordMessage);
+                return;
+            }
+    
+            axiosConfig.post('/signup', {
+                "email": email,
+                "password": SHA256(password).toString(),
+            }).then((response) => {
+                let token = response.data.token;
+                let id = response.data.id;
+                AsyncStorage.setItem('token', token);
+                AsyncStorage.setItem('id', id);
+            }).catch((error) => {
+                console.log(error);
+            })
+        };
     };
 
     return (
@@ -84,16 +202,22 @@ export default function Guest() {
                         <TextInput
                             style={styles.input}
                             placeholder="Email"
+                            value={email}
+                            onChangeText={setUsername}
                             keyboardType="email-address"
                         />
                         <TextInput
                             style={styles.input}
                             placeholder="Password"
+                            value={password}
+                            onChangeText={setPassword}
                             secureTextEntry
                         />
                         <TextInput
                             style={styles.input}
                             placeholder="Confirm Password"
+                            value={password2}
+                            onChangeText={setPassword2}
                             secureTextEntry
                         />
                         <View style={styles.dobContainer}>
