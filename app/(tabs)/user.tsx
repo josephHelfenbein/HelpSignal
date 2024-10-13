@@ -1,12 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Collapsible } from '@/components/Collapsible';
 import { ThemedText } from '@/components/ThemedText';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 
 export default function User() {
     var key = 1;
+    const navigation = useNavigation(); // Get the navigation object
     const user = {
         name: 'John Doe',
         role: 'Rescuer',
@@ -57,34 +59,40 @@ export default function User() {
                         <Text style={styles.userRole}>{user.role} | {user.saved}</Text>
 
                         {/* Certifications Section */}
-                        <Text style={styles.certificationsTitle}>Certifications:</Text>
-                        <View style={styles.certificationsList}>
-                            {user.certifications.map((certification) => (
-                                <View key={key++} style={styles.box}>
-                                    <Ionicons name="chevron-forward" size={20} color="#f83e3e" style={styles.arrowIcon} />
-                                    <Collapsible title={certification.name}>
-                                        <ThemedText>{certification.details}</ThemedText>
-                                        <ThemedText>
-                                            <ThemedText type="defaultSemiBold">Certified By</ThemedText>{certification.certifiedBy}
-                                        </ThemedText>
-                                    </Collapsible>
-                                </View>
-                            ))}
+                        <View style={styles.outsideCover}>
+                            <Text style={styles.certificationsTitle}>Certifications:</Text>
+                            <View style={styles.certificationsList}>
+                                {user.certifications.map((certification) => (
+                                    <View key={key++} style={styles.bubble}>
+                                        <Collapsible title={certification.name}>
+                                            <ThemedText>{certification.details}</ThemedText>
+                                            <ThemedText>
+                                                <ThemedText type="defaultSemiBold">Certified By: </ThemedText>{certification.certifiedBy}
+                                            </ThemedText>
+                                        </Collapsible>
+                                    </View>
+                                ))}
+                            </View>
                         </View>
 
                         {/* Medical Equipments Section */}
-                        <Text style={styles.medicalEquipmentTitle}>Medical Equipments</Text>
-                        <View style={styles.medicalEquipmentList}>
-                            {user.readiness.map((readiness) => (
-                                <View key={key++} style={styles.box}>
-                                    <Collapsible title={readiness.name}>
-                                        <ThemedText>
-                                            {readiness.details}
-                                        </ThemedText>
-                                    </Collapsible>
-                                </View>
-                            ))}
+                        <View style={styles.outsideCover}>
+                            <Text style={styles.medicalEquipmentTitle}>Medical Equipments</Text>
+                            <View style={styles.medicalEquipmentList}>
+                                {user.readiness.map((readiness) => (
+                                    <View key={key++} style={styles.bubble}>
+                                        <Collapsible title={readiness.name}>
+                                            <ThemedText>{readiness.details}</ThemedText>
+                                        </Collapsible>
+                                    </View>
+                                ))}
+                            </View>
                         </View>
+
+                        {/* Navigate to Skills Tab Button
+                        <TouchableOpacity style={styles.skillsButton} onPress={() => navigation.navigate(kills)}>
+                            <Text style={styles.skillsButtonText}>Go to Skills</Text>
+                        </TouchableOpacity> */}
                     </View>
                 </View>
             </ParallaxScrollView>
@@ -93,6 +101,10 @@ export default function User() {
 }
 
 const styles = StyleSheet.create({
+    outsideCover: {
+        width: '100%',
+        paddingHorizontal: 10,
+    },
     headerImageContainer: {
         height: 180,
         justifyContent: 'center',
@@ -100,30 +112,35 @@ const styles = StyleSheet.create({
         backgroundColor: '#f83e3e', // Red header background
         position: 'relative',
     },
-    box: {
-        borderBottomWidth: 2,
-        borderBottomColor: '#f83e3e', // Red line at the bottom
-        paddingVertical: 10,
-        paddingHorizontal: 0,
-        marginBottom: 15,
-        alignSelf: 'stretch', // Make sure the red line spans full width
+    bubble: {
+        borderWidth: 2,
+        borderColor: '#f83e3e', // Red border around the bubble
+        borderRadius: 10, // Rounded corners for the bubble effect
+        padding: 15,
+        marginBottom: 20, // Space between bubbles
+        backgroundColor: '#FFF',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.2,
+        shadowRadius: 8,
+        elevation: 5, // Android shadow
     },
     container: {
         flex: 1,
-        position: 'relative', // Ensures absolute children are positioned relative to this container
+        position: 'relative',
     },
     menuIcon: {
         position: 'absolute',
         top: 50,
         left: 20,
-        zIndex: 10, // Ensure it's on top of other elements
+        zIndex: 10,
         color: '#ffffff', // White icon
     },
     settingsIcon: {
         position: 'absolute',
         top: 50,
         right: 20,
-        zIndex: 10, // Ensure it's on top of other elements
+        zIndex: 10,
         color: '#ffffff', // White icon
     },
     headerImage: {
@@ -132,6 +149,7 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         flex: 1,
+        paddingHorizontal: 20, // Added padding to avoid edge clipping
     },
     userInfo: {
         alignItems: 'center',
@@ -158,31 +176,33 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     certificationsTitle: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 10,
         color: '#000000', // Black text
     },
     certificationsList: {
-        alignSelf: 'flex-start', // Shift the certifications to the left
-        marginBottom: 50,
+        marginBottom: 20,
     },
     medicalEquipmentTitle: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 10,
         color: '#000000', // Black text
     },
     medicalEquipmentList: {
-        alignSelf: 'flex-start', // Shift the certifications to the left
         marginBottom: 10,
     },
-    certification: {
-        fontSize: 16,
-        color: '#7f7f7f', // Gray text
-        marginBottom: 5,
+    skillsButton: {
+        marginTop: 20, // Space above the button
+        padding: 10,
+        backgroundColor: '#f83e3e', // Button background color
+        borderRadius: 5,
+        alignItems: 'center',
     },
-    arrowIcon: {
-        marginRight: 2, // Add space between the arrow and text
+    skillsButtonText: {
+        color: '#FFFFFF', // White text for the button
+        fontSize: 16,
+        fontWeight: 'bold',
     },
 });

@@ -4,25 +4,28 @@ import React, { useState } from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { TouchableOpacityBase } from 'react-native';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [showSpeakScreen, setShowSpeakScreen] = useState(false);
+  const isAuthenticated = true;
 
   return (
     <Tabs
-    screenOptions={({ route }) => ({
-      tabBarStyle: {
-        display: route.name === 'speak' ? 'none' : 'flex', // Hide tab bar when the Speak screen is active
-      },
-      headerShown: false, // No header
+      screenOptions={({ route }) => ({
+        tabBarStyle: {
+          display: route.name === 'speak' ? 'none' : 'flex', // Hide tab bar when the Speak screen is active
+          backgroundColor: '#f83e3e',
+        },
+        headerShown: false, // No header
       })}>
       <Tabs.Screen
         name="index"
         options={{
           title: "SOS",
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'alert' : 'alert-outline'} color={color} />
+            <TabBarIcon name={focused ? 'alert' : 'alert-outline'} color={"#FFFF"} />
           ),
         }}
       />
@@ -31,26 +34,36 @@ export default function RootLayout() {
         options={{
           title: 'Certification',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <TabBarIcon name={focused ? 'add' : 'add-outline'} color={"#FFFF"} />
           ),
         }}
       />
-      <Tabs.Screen
-        name="user"
+       <Tabs.Screen
+        name={isAuthenticated ? "user" : "guest"} // Redirect to guest screen if not authenticated
         options={{
-          title: "User",
+          title: isAuthenticated ? "User" : "Guest",
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'person-circle' : 'person-circle-outline'} color={color} />
+            <TabBarIcon name={focused ? 'person-circle' : 'person-circle-outline'} color={"#FFFF"} />
           ),
         }}
       />
       <Tabs.Screen
         name="speak"
         options={{
-          title:'Speak',
+          title: 'Speak',
           tabBarButton: () => null, // Hiding speak from the tab bar
         }}
       />
+      <Tabs.Screen
+        name="responders"
+        options={{
+          title: 'Responders',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'megaphone' : 'megaphone-outline'} color={"#FFFF"} />
+          ),
+        }}
+      />
+    
     </Tabs>
   );
 }

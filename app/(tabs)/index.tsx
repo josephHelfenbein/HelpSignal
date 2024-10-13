@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { View, TouchableOpacity, Animated, Text, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const SOSScreen = () => {
   const router = useRouter();
@@ -45,28 +46,41 @@ const SOSScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.emergency}>EMERGENCY CALL</Text>
-      <View>
-        <TouchableOpacity onPress={handlePress}>
-          <Animated.View style={[styles.button, { transform: [{ scale: pulseAnimation }] }]}>
-            <Text style={styles.buttonText}>S.O.S</Text>
-          </Animated.View>
-        </TouchableOpacity>
+    <View style={styles.container1}>
+      <Ionicons name="menu" size={30} style={styles.menuIcon} />
+      <Ionicons name="settings" size={30} style={styles.settingsIcon} />
+      <View style={styles.container}>
+        <Text style={styles.emergency}>EMERGENCY CALL</Text>
+        <View style={styles.circleContainer}>
+          <TouchableOpacity onPress={handlePress}>
+            <Animated.View style={[styles.button, { transform: [{ scale: pulseAnimation }] }]}>
+              <Text style={styles.buttonText}>S.O.S</Text>
+            </Animated.View>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container1: {
+    flex: 1,
+    position: 'relative', // Ensures absolute children are positioned relative to this container
+  },
   emergency: {
-    color: '#f80000',
+    color: '#f83e3e',
     fontWeight: 'bold',
     fontSize: 40,
+    marginBottom: 50, // Add space between text and circle
+    textAlign: 'center',
   },
   container: {
-    marginBottom: 200,
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  circleContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -82,6 +96,20 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 50,
     fontWeight: 'bold',
+  },
+  menuIcon: {
+    position: 'absolute',
+    top: 50,
+    left: 20,
+    color: '#f83e3e',
+    zIndex: 10,
+  },
+  settingsIcon: {
+    position: 'absolute',
+    top: 50,
+    right: 20,
+    zIndex: 10,
+    color: '#f83e3e',
   },
 });
 
