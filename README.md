@@ -57,13 +57,8 @@
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
+      <a href="#get-started">Get Started</a>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -88,6 +83,14 @@ Here's why this project matters:
 - Technology for good. This project leverages technology to enhance public safety, ensuring that our communities are better prepared for emergencies.
 
 We understand that no single solution fits all scenarios. This app is a work in progress, and we're committed to evolving it based on feedback and real-world usage. Your insights are invaluable, so please feel free to contribute by forking this repo, submitting a pull request, or opening an issue.
+
+### How it works
+
+We used React Native and Expo Development to build the application, targeting Android for live voice transcription from expo-speech-recognition and sending the transcription after recording to Cloudflare Worker. The Cloudflare Worker then uses the BAAI general embedding model to vectorize the transcription. The categories of needed certifications or experience are in a vector database, and vector search is done to get the most relevant person for the situation.
+
+The account system is on Amazon RDS, as well as the current emergencies. After an emergency is categorized, it's put onto the database, which is called on every refresh by people with accounts and certifications. A map is shown on the page to show locations of emergencies.
+
+The backend is hosted on a separate Flask server, which can be found [here](https://github.com/YashedP/2024-hackharvard-flask).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
