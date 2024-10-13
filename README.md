@@ -34,16 +34,11 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">HelpSignal</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    An emergency app using voice input to assess situations, alert nearby certified helpers (CPR, first aid), and notify first responders—providing immediate assistance before official help arrives.
     <br />
-    <a href="https://github.com/josephHelfenbein/HelpSignal"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/josephHelfenbein/HelpSignal">View Demo</a>
-    ·
     <a href="https://github.com/josephHelfenbein/HelpSignal/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
     <a href="https://github.com/josephHelfenbein/HelpSignal/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
@@ -70,8 +65,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -85,7 +78,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-In a world where every second counts, I've noticed a crucial gap in emergency response. That's why I embarked on creating this app: to bridge the response time between calling for help and receiving it. My goal is to connect CPR experts, EMTs, and medical professionals with those in need, ensuring that help arrives faster than ever.
+In a world where every second counts, we've noticed a crucial gap in emergency response. That's why we embarked on creating this app: to bridge the response time between calling for help and receiving it. Our goal is to connect CPR experts, EMTs, and medical professionals with those in need, ensuring that help arrives faster than ever.
 
 Here's why this project matters:
 
@@ -95,8 +88,7 @@ Here's why this project matters:
 
 - Technology for good. This project leverages technology to enhance public safety, ensuring that our communities are better prepared for emergencies.
 
-I understand that no single solution fits all scenarios. This app is a work in progress, and I'm committed to evolving it based on feedback and real-world usage. Your insights are invaluable, so please feel free to contribute by forking this repo, submitting a pull request, or opening an issue. Thank you to everyone who has joined me on this journey to make our communities safer!
-Use the `BLANK_README.md` to get started.
+We understand that no single solution fits all scenarios. This app is a work in progress, and we're committed to evolving it based on feedback and real-world usage. Your insights are invaluable, so please feel free to contribute by forking this repo, submitting a pull request, or opening an issue.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -104,16 +96,19 @@ Use the `BLANK_README.md` to get started.
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-* [![Next][Next.js]][Next-url]
 * [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* [![Expo][Expo]][Expo-url]
+* [![Flask][Flask]][Flask-url]
+* [![Amazon-RDS][Amazon-RDS]][Amazon-RDS-url]
+* [![Cloudflare][Cloudflare]][Cloudflare-url]
+
+Programmed in
+* [![JavaScript][JavaScript]][JavaScript-url]
+* [![TypeScript][TypeScript]][TypeScript-url]
+* [![Python][Python]][Python-url]
+  
+Powered by
+* [![Vercel][Vercel]][Vercel-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -214,7 +209,7 @@ Use this space to list resources you find helpful and would like to give credit 
 [product-screenshot]: images/screenshot.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React.js]: https://img.shields.io/badge/React%20Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
 [Vue-url]: https://vuejs.org/
@@ -228,3 +223,21 @@ Use this space to list resources you find helpful and would like to give credit 
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com 
+[Expo]: https://img.shields.io/badge/expo-000000?style=for-the-badge&logo=expo&logoColor=white
+[Expo-url]: https://expo.dev/
+[Flask]: https://img.shields.io/badge/flask-4590A1?logo=flask&style=for-the-badge&logoColor=white
+[Flask-url]: https://flask.palletsprojects.com/en/3.0.x/
+[JavaScript]: https://img.shields.io/badge/javascript-yellow?logo=javascript&style=for-the-badge&logoColor=white
+[JavaScript-url]: https://developer.oracle.com/languages/javascript.html
+[ThreeJS]: https://img.shields.io/badge/three.js-black?logo=three.js&style=for-the-badge&logoColor=white
+[ThreeJS-url]: https://threejs.org/
+[TypeScript]: https://img.shields.io/badge/typescript-3178C6?logo=typescript&style=for-the-badge&logoColor=white
+[TypeScript-url]: https://www.typescriptlang.org/
+[Python]: https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white
+[Python-url]: https://www.python.org/
+[Amazon-RDS]: https://img.shields.io/badge/amazon%20rds-527FFF?style=for-the-badge&logo=amazon%20rds&logoColor=white
+[Amazon-RDS-url]: https://aws.amazon.com/rds/
+[Cloudflare]: https://img.shields.io/badge/cloudflare%20workers-F38020?style=for-the-badge&logo=cloudflare%20workers&logoColor=white
+[Cloudflare-url]: https://workers.cloudflare.com/
+[Vercel]: https://img.shields.io/badge/vercel-000000?logo=vercel&style=for-the-badge&logoColor=white
+[Vercel-url]: https://www.vercel.com/
