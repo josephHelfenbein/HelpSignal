@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { ExpoSpeechRecognitionModule, useSpeechRecognitionEvent } from 'expo-speech-recognition';
+import { ExpoSpeechRecognitionModule, useSpeechRecognitionEvent } from "expo-speech-recognition";
+
 
 
 const styles = StyleSheet.create({
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
 export default function AudioTranscriber () {
   const [recognizing, setRecognizing] = useState(false);
   const [transcript, setTranscript] = useState("");
+  const [responseText, setResponseText] = useState("");
   useSpeechRecognitionEvent("start", () => setRecognizing(true));
   useSpeechRecognitionEvent("end", () => setRecognizing(false));
   useSpeechRecognitionEvent("result", (event) => {
@@ -64,11 +66,13 @@ export default function AudioTranscriber () {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ text: transcription }),
+        body: JSON.stringify({ "text": `${transcription}` }),
       });
       const result = await response.json();
+      setResponseText('Response from Cloudflare: ' + result);
       console.log('Response from Cloudflare: ', result);
     } catch (error) {
+      setResponseText('Error sending transcription to Cloudflare: ' + error);
       console.error('Error sending transcription to Cloudflare: ', error);
     }
   };
@@ -89,6 +93,7 @@ export default function AudioTranscriber () {
           <Ionicons name="mic" size={recognizing?75:100} color="white" />
         </TouchableOpacity>
         <Text>{transcript}</Text>
+        <Text>{responseText}</Text>
     </View>
   );
 }

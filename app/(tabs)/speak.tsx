@@ -2,6 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router'; // Import router
+import AudioTranscriber from '../../components/AudioTranscriber'
 
 const SpeakScreen = () => {
   const handlePress = () => {
@@ -14,11 +15,12 @@ const SpeakScreen = () => {
   };
 
   return (
+    
     <View style={styles.container}>
       <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
         <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
-
+      <AudioTranscriber />
       <Text style={styles.text}>Press the microphone to speak:</Text>
       <TouchableOpacity onPress={handlePress} style={styles.microphoneButton}>
         <Ionicons name="mic" size={100} color="white" />
