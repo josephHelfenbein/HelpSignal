@@ -20,11 +20,8 @@ const SpeakScreen = () => {
       <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
         <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
-      <AudioTranscriber />
       <Text style={styles.text}>Press the microphone to speak:</Text>
-      <TouchableOpacity onPress={handlePress} style={styles.microphoneButton}>
-        <Ionicons name="mic" size={100} color="white" />
-      </TouchableOpacity>
+      <AudioTranscriber />
     </View>
   );
 };
