@@ -32,39 +32,39 @@ export default function Guest() {
     const handleLoginPress = () => {
         setIsLogin(true);
         setIsSignUp(false);
+    };
 
-        if (doubleClick != 0) {
-            doubleClick = 0;
-            return;
-        }
-
+    const logIn = () => {
         if (!email.includes('@')) {
             alert("Invalid email\n")
             return;
         }
-        
+        console.log(SHA256(password).toString());
         axiosConfig.post('/login', {
             "email": email,
             "password": SHA256(password).toString()
         }).then((response) => {
-            let token = response.data.token;
-            let user = response.data.user;
-            AsyncStorage.setItem('token', token);
-            AsyncStorage.setItem('user', user);
+            if (response.data["message"] === "Logged in") {
+                let token = response.data.token;
+                let user = response.data.user;
+                AsyncStorage.setItem('token', token);
+                AsyncStorage.setItem('user', user);
+                return;
+            }                    
+            
+            alert("Invalid email or password\n");
         }).catch((error) => {
             console.log(error);
         })
-    };
+    }
 
     const handleSignUpPress = () => {
         setIsSignUp(true);
         setIsLogin(false);
+    };
 
-        if (doubleClick != 1) {
-            doubleClick = 1;
-            return;
-        }
-
+    const signUp = () => {
+        console.log(email);
         let msg = "";
         let invalid = false;
         if (email.includes('@') === false) {
@@ -137,10 +137,14 @@ export default function Guest() {
             return;
         }
 
+        console.log(email + " " + password + " " + firstName + " " + lastName);
         axiosConfig.post('/signup', {
             "email": email,
             "password": SHA256(password).toString(),
+            "firstName": firstName,
+            "lastName": lastName,
         }).then((response) => {
+            console.log(response);
             let token = response.data.token;
             let id = response.data.id;
             AsyncStorage.setItem('token', token);
@@ -148,7 +152,7 @@ export default function Guest() {
         }).catch((error) => {
             console.log(error);
         });
-    };
+    }
 
     return (
         <ParallaxScrollView
@@ -177,11 +181,24 @@ export default function Guest() {
                 {/* Login Form */}
                 {isLogin && (
                     <View style={styles.formContainer}>
-                        <TextInput style={styles.input} placeholder="Email" keyboardType="email-address" />
-                        <TextInput style={styles.input} placeholder="Password" secureTextEntry />
-                        <TouchableOpacity style={styles.loginButton}>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Email"
+                            value={email}
+                            onChangeText={setUsername}
+                            keyboardType="email-address"
+                        />
+                        <TextInput 
+                        style={styles.input} 
+                        placeholder="Password" 
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry />
+                        
+                        <TouchableOpacity style={styles.loginButton} onPress={logIn}>
                             <Text style={styles.buttonText}>Login</Text>
                         </TouchableOpacity>
+
                         <Text style={styles.orText}>OR</Text>
                         <TouchableOpacity style={styles.signupButton} onPress={handleSignUpPress}>
                             <Text style={styles.buttonText}>Sign Up</Text>
@@ -262,7 +279,7 @@ export default function Guest() {
                                 ))}
                             </Picker>
                         </View>
-                        <TouchableOpacity style={styles.signupButton}>
+                        <TouchableOpacity style={styles.signupButton} onPress={signUp}>
                             <Text style={styles.buttonText}>Sign Up</Text>
                         </TouchableOpacity>
                         <Text style={styles.orText}>OR</Text>
