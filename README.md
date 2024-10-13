@@ -31,7 +31,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/josephHelfenbein/HelpSignal">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/josephHelfenbein/HelpSignal/blob/main/helpsignal-logo.png" alt="Logo" width="200" >
   </a>
 
   <h3 align="center">HelpSignal</h3>
