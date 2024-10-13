@@ -102,7 +102,6 @@ We understand that no single solution fits all scenarios. This app is a work in 
 * [![Cloudflare][Cloudflare]][Cloudflare-url]
 
 Programmed in
-* [![JavaScript][JavaScript]][JavaScript-url]
 * [![TypeScript][TypeScript]][TypeScript-url]
 * [![Python][Python]][Python-url]
   
