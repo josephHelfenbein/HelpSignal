@@ -23,7 +23,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 
@@ -166,7 +165,13 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Joseph Helfenbein - [![linkedin][linkedin-shield]][JoeLinkedin-url]
+
+Yash Jani - [![linkedin][linkedin-shield]][YashLinkedin-url]
+
+Nghia Duong - [![linkedin][linkedin-shield]][HarryLinkedin-url]
+
+Priank Dasgupta - [![linkedin][linkedin-shield]][PriankLinkedin-url]
 
 Project Link: [https://github.com/josephHelfenbein/HelpSignal](https://github.com/josephHelfenbein/HelpSignal)
 
@@ -177,16 +182,12 @@ Project Link: [https://github.com/josephHelfenbein/HelpSignal](https://github.co
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+This project was submitted to the HackHarvard 2024 hackathon for the AllHealth track.
 
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
+Devpost link: [https://devpost.com/software/helpsignal](https://devpost.com/software/helpsignal)
+
+
+* [Best README Template](https://github.com/othneildrew/Best-README-Template)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -241,3 +242,7 @@ Use this space to list resources you find helpful and would like to give credit 
 [Cloudflare-url]: https://workers.cloudflare.com/
 [Vercel]: https://img.shields.io/badge/vercel-000000?logo=vercel&style=for-the-badge&logoColor=white
 [Vercel-url]: https://www.vercel.com/
+[JoeLinkedin-url]:https://www.linkedin.com/in/joseph-j-helfenbein/
+[YashLinkedin-url]: https://www.linkedin.com/in/yash-jani-potatoes/
+[HarryLinkedin-url]: https://www.linkedin.com/in/harrydng/
+[PriankLinkedin-url]: https://www.linkedin.com/in/priank-dasgupta
