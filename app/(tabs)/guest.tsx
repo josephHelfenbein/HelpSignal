@@ -32,115 +32,111 @@ export default function Guest() {
         setIsLogin(true);
         setIsSignUp(false);
 
-        const handleLogin = () => {
-            if (!email.includes('@')) {
-                alert("Invalid email\n")
-                return;
-            }
-        
-            axiosConfig.post('/login', {
-                "email": email,
-                "password": SHA256(password).toString()
-            }).then((response) => {
-                let token = response.data.token;
-                let user = response.data.user;
-                AsyncStorage.setItem('token', token);
-                AsyncStorage.setItem('user', user);
-            }).catch((error) => {
-                console.log(error);
-            })
+        if (!email.includes('@')) {
+            alert("Invalid email\n")
+            return;
         }
+    
+        axiosConfig.post('/login', {
+            "email": email,
+            "password": SHA256(password).toString()
+        }).then((response) => {
+            let token = response.data.token;
+            let user = response.data.user;
+            AsyncStorage.setItem('token', token);
+            AsyncStorage.setItem('user', user);
+        }).catch((error) => {
+            console.log(error);
+        })
     };
 
     const handleSignUpPress = () => {
         setIsSignUp(true);
         setIsLogin(false);
 
-        const handleSignUp = () => {
-            let msg = "";
-            let invalid = false;
-            if (email.includes('@') === false) {
-                invalid = true;
-                msg += "Invalid email\n";
-            }
-    
-            let passwordMessage = "";
-            let firstPasswordInvalid = false;
-    
-            if (password.length < 8) {
-                invalid = true;
-                if (firstPasswordInvalid === false) {
-                    passwordMessage += "Password must be at least 8 characters long";
-                    firstPasswordInvalid = true;
-                }
-            }
-    
-            if (password.search(/[a-z]/) < 0) {
-                invalid = true;
-                if (firstPasswordInvalid === false) {
-                    passwordMessage += "Password must contain at least one lowercase letter";
-                    firstPasswordInvalid = true;
-                }
-                else {
-                    passwordMessage += ", one lowercase letter";
-                }
-            }
-    
-            if (password.search(/[A-Z]/) < 0) {
-                invalid = true;
-                if (firstPasswordInvalid === false) {
-                    passwordMessage += "Password must contain at least one uppercase letter";
-                    firstPasswordInvalid = true;
-                }
-                else {
-                    passwordMessage += ", one uppercase letter";
-                }
-            }
-    
-            if (password.search(/[0-9]/) < 0) {
-                invalid = true;
-                if (firstPasswordInvalid === false) {
-                    passwordMessage += "Password must contain at least one number";
-                    firstPasswordInvalid = true;
-                }
-                else {
-                    passwordMessage += ", one number";
-                }
-            }
-    
-            if (password.search(/[^a-zA-Z0-9]/) < 0) {
-                invalid = true;
-                if (firstPasswordInvalid === false) {
-                    passwordMessage += "Password must contain at least one special character";
-                    firstPasswordInvalid = true;
-                }
-                else {
-                    passwordMessage += ", one special character";
-                }
-            }
-            
-            if (!invalid && password !== password2) {
-                invalid = true;
-                msg += "Passwords do not match\n";
-            }
+        let msg = "";
+        let invalid = false;
+        if (email.includes('@') === false) {
+            invalid = true;
+            msg += "Invalid email\n";
+        }
 
-            if (invalid) {
-                alert(msg + "\n" + passwordMessage);
-                return;
+        let passwordMessage = "";
+        let firstPasswordInvalid = false;
+
+        if (password.length < 8) {
+            invalid = true;
+            if (firstPasswordInvalid === false) {
+                passwordMessage += "Password must be at least 8 characters long";
+                firstPasswordInvalid = true;
             }
-    
-            axiosConfig.post('/signup', {
-                "email": email,
-                "password": SHA256(password).toString(),
-            }).then((response) => {
-                let token = response.data.token;
-                let id = response.data.id;
-                AsyncStorage.setItem('token', token);
-                AsyncStorage.setItem('id', id);
-            }).catch((error) => {
-                console.log(error);
-            })
-        };
+        }
+
+        if (password.search(/[a-z]/) < 0) {
+            invalid = true;
+            if (firstPasswordInvalid === false) {
+                passwordMessage += "Password must contain at least one lowercase letter";
+                firstPasswordInvalid = true;
+            }
+            else {
+                passwordMessage += ", one lowercase letter";
+            }
+        }
+
+        if (password.search(/[A-Z]/) < 0) {
+            invalid = true;
+            if (firstPasswordInvalid === false) {
+                passwordMessage += "Password must contain at least one uppercase letter";
+                firstPasswordInvalid = true;
+            }
+            else {
+                passwordMessage += ", one uppercase letter";
+            }
+        }
+
+        if (password.search(/[0-9]/) < 0) {
+            invalid = true;
+            if (firstPasswordInvalid === false) {
+                passwordMessage += "Password must contain at least one number";
+                firstPasswordInvalid = true;
+            }
+            else {
+                passwordMessage += ", one number";
+            }
+        }
+
+        if (password.search(/[^a-zA-Z0-9]/) < 0) {
+            invalid = true;
+            if (firstPasswordInvalid === false) {
+                passwordMessage += "Password must contain at least one special character";
+                firstPasswordInvalid = true;
+            }
+            else {
+                passwordMessage += ", one special character";
+            }
+        }
+        
+        if (!invalid && password !== password2) {
+            invalid = true;
+            msg += "Passwords do not match\n";
+        }
+
+        if (invalid) {
+            alert(msg + "\n" + passwordMessage);
+            return;
+        }
+
+        axiosConfig.post('/signup', {
+            "email": email,
+            "password": SHA256(password).toString(),
+        }).then((response) => {
+            let token = response.data.token;
+            let id = response.data.id;
+            AsyncStorage.setItem('token', token);
+            AsyncStorage.setItem('id', id);
+        }).catch((error) => {
+            console.log(error);
+        });
     };
 
     return (
