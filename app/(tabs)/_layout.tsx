@@ -1,10 +1,7 @@
 import { Tabs } from 'expo-router';
 import React, { useState } from 'react';
-
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { TouchableOpacityBase } from 'react-native';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -19,6 +16,11 @@ export default function RootLayout() {
           backgroundColor: '#f83e3e',
         },
         headerShown: false, // No header
+        tabBarLabelStyle:
+        {
+          color: '#fff',
+          fontSize: 12,
+        },
       })}>
       <Tabs.Screen
         name="index"
@@ -55,6 +57,13 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
+        name="skills"
+        options={{
+          title: 'Skills',
+          tabBarButton: () => null, // Hiding skills from the tab bar
+        }}
+      />
+      <Tabs.Screen
         name="responders"
         options={{
           title: 'Responders',
@@ -63,7 +72,6 @@ export default function RootLayout() {
           ),
         }}
       />
-    
     </Tabs>
   );
 }

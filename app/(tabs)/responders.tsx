@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     },
     info: {
         fontSize: 18,
-        color: '#5D4037', // Brownish color for info
+        color: '#000000', // Brownish color for info
         fontWeight: '400',
     },
 });

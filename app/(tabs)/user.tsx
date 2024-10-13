@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native'; // Import useNavigatio
 
 export default function User() {
     var key = 1;
-    const navigation = useNavigation(); // Get the navigation object
+    const navigation = useNavigation<any>(); // Get the navigation object
     const user = {
         name: 'John Doe',
         role: 'Rescuer',
@@ -40,8 +40,9 @@ export default function User() {
 
     return (
         <View style={styles.container}>
-            <Ionicons name="menu" size={30} style={styles.menuIcon} />
-            <Ionicons name="settings" size={30} style={styles.settingsIcon} />
+            <TouchableOpacity style={styles.settingsButton} onPress={() => navigation.navigate('skills')}>
+                <Ionicons name="settings" size={30} style={styles.settingsIcon}/>
+            </TouchableOpacity>
             <ParallaxScrollView
                 headerBackgroundColor={{ light: '#f83e3e', dark: '#f83e3e' }}
                 headerImage={
@@ -88,11 +89,6 @@ export default function User() {
                                 ))}
                             </View>
                         </View>
-
-                        {/* Navigate to Skills Tab Button
-                        <TouchableOpacity style={styles.skillsButton} onPress={() => navigation.navigate(kills)}>
-                            <Text style={styles.skillsButtonText}>Go to Skills</Text>
-                        </TouchableOpacity> */}
                     </View>
                 </View>
             </ParallaxScrollView>
@@ -101,6 +97,13 @@ export default function User() {
 }
 
 const styles = StyleSheet.create({
+    settingsButton: {
+        position: 'absolute',
+        top: 50,
+        right: 20,
+        zIndex: 10,
+        color: '#FFFFFF', // White icon
+    },
     outsideCover: {
         width: '100%',
         paddingHorizontal: 10,
@@ -137,10 +140,6 @@ const styles = StyleSheet.create({
         color: '#ffffff', // White icon
     },
     settingsIcon: {
-        position: 'absolute',
-        top: 50,
-        right: 20,
-        zIndex: 10,
         color: '#ffffff', // White icon
     },
     headerImage: {

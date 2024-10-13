@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, ActivityIndicator, Dimensions } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 
 const { width } = Dimensions.get('window');  // Get device screen width for card sizing
 
@@ -18,6 +19,7 @@ export default function GetCertifications() {
     const [courses, setCourses] = useState<Course[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const navigation = useNavigation<any>(); // Get the navigation object
 
     // Fetch Coursera Health-Related Courses
     const fetchCourses = async () => {
@@ -87,8 +89,9 @@ export default function GetCertifications() {
     // Render health-related Coursera courses
     return (
         <View>
-            <Ionicons name="menu" size={30} style={styles.menuIcon} />
-            <Ionicons name="settings" size={30} style={styles.settingsIcon} />
+            <TouchableOpacity style={styles.settingsButton} onPress={() => navigation.navigate('skills')}>
+                <Ionicons name="settings" size={30} style={styles.settingsIcon}/>
+            </TouchableOpacity>
             <View style={styles.redBox}>
                 <Text style={styles.become}>Become A</Text>
             </View>
@@ -151,20 +154,16 @@ const styles = StyleSheet.create({
         top: 73,
         marginBottom: 5,
     },
-    menuIcon: {
-        position: 'absolute',
-        top: 50,
-        left: 20,
-        color: '#f83e3e',
-        zIndex: 10,
-    },
-    settingsIcon: {
+    settingsButton: {
         position: 'absolute',
         top: 50,
         right: 20,
         zIndex: 10,
-        color: '#f83e3e',
-    },
+        color: '#FFFFFF', // White icon
+      },
+      settingsIcon: {
+        color: '#f83e3e', // White icon
+      },
     courseCard: {
         top: 80,
         width: width * 0.8,  // 80% of screen width for card size

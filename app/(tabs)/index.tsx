@@ -2,11 +2,13 @@ import React, { useState, useRef } from 'react';
 import { View, TouchableOpacity, Animated, Text, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 
 const SOSScreen = () => {
   const router = useRouter();
   const [isPulsing, setIsPulsing] = useState(false);
   const pulseAnimation = useRef(new Animated.Value(1)).current;
+  const navigation = useNavigation<any>(); // Get the navigation object
 
   const handlePress = () => {
     if (!isPulsing) {
@@ -25,12 +27,12 @@ const SOSScreen = () => {
       Animated.sequence([
         Animated.timing(pulseAnimation, {
           toValue: 1.2, // Scale up
-          duration: 400,
+          duration: 50,
           useNativeDriver: true,
         }),
         Animated.timing(pulseAnimation, {
           toValue: 1, // Scale down
-          duration: 400,
+          duration: 50,
           useNativeDriver: true,
         }),
       ]),
@@ -47,14 +49,15 @@ const SOSScreen = () => {
 
   return (
     <View style={styles.container1}>
-      <Ionicons name="menu" size={30} style={styles.menuIcon} />
-      <Ionicons name="settings" size={30} style={styles.settingsIcon} />
+      <TouchableOpacity style={styles.settingsButton} onPress={() => navigation.navigate('skills')}>
+        <Ionicons name="settings" size={30} style={styles.settingsIcon} />
+      </TouchableOpacity>
       <View style={styles.container}>
         <Text style={styles.emergency}>EMERGENCY CALL</Text>
         <View style={styles.circleContainer}>
           <TouchableOpacity onPress={handlePress}>
             <Animated.View style={[styles.button, { transform: [{ scale: pulseAnimation }] }]}>
-              <Text style={styles.buttonText}>S.O.S</Text>
+              <Text style={styles.buttonText}>SOS</Text>
             </Animated.View>
           </TouchableOpacity>
         </View>
@@ -91,25 +94,26 @@ const styles = StyleSheet.create({
     backgroundColor: 'red', // Change to desired background color
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.7,
+    shadowRadius: 4,
+    elevation: 5,
   },
   buttonText: {
     color: 'white',
     fontSize: 50,
     fontWeight: 'bold',
   },
-  menuIcon: {
-    position: 'absolute',
-    top: 50,
-    left: 20,
-    color: '#f83e3e',
-    zIndex: 10,
-  },
-  settingsIcon: {
+  settingsButton: {
     position: 'absolute',
     top: 50,
     right: 20,
     zIndex: 10,
-    color: '#f83e3e',
+    color: '#FFFFFF', // White icon
+  },
+  settingsIcon: {
+    color: '#f83e3e', // White icon
   },
 });
 
