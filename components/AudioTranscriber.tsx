@@ -3,6 +3,15 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { ExpoSpeechRecognitionModule, useSpeechRecognitionEvent } from "expo-speech-recognition";
 
+function getTagName(newStr:string){
+  var newNewStr = "";
+  for(let i=0; i<newStr.length; i++){
+    if(newStr[i] != ':'){
+      newNewStr += newStr[i];
+    }else break;
+  }
+  return newNewStr;
+}
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -35,7 +44,7 @@ export default function AudioTranscriber () {
   const [transcript, setTranscript] = useState("");
   const [responseText, setResponseText] = useState("");
   useSpeechRecognitionEvent("start", () => setRecognizing(true));
-  useSpeechRecognitionEvent("end", () => setRecognizing(false));
+  useSpeechRecognitionEvent("end", () => stopAndSendTranscription());
   useSpeechRecognitionEvent("result", (event) => {
     setTranscript(event.results[0]?.transcript);
   });
@@ -67,7 +76,7 @@ export default function AudioTranscriber () {
         body: JSON.stringify({ "text": `${transcription}` }),
       });
       const result = await response.json();
-      setResponseText('Response from Cloudflare: ' + result);
+      setResponseText(getTagName(result.matchedString));
       console.log('Response from Cloudflare: ', result);
     } catch (error) {
       setResponseText('Error sending transcription to Cloudflare: ' + error);
@@ -80,6 +89,8 @@ export default function AudioTranscriber () {
     setRecognizing(false);
   };
   useEffect(() => {
+    setTranscript("");
+    setResponseText("");
     ExpoSpeechRecognitionModule.getPermissionsAsync().then((result) => {
       console.log("Initial Permissions status:", result.status);
     });
@@ -87,11 +98,15 @@ export default function AudioTranscriber () {
 
   return (
     <View>
-        <TouchableOpacity onPress={recognizing? stopAndSendTranscription : handleStart} style={styles.microphoneButton}>
+      <View>
+      <TouchableOpacity onPress={recognizing? stopAndSendTranscription : handleStart} style={styles.microphoneButton}>
           <Ionicons name="mic" size={recognizing?75:100} color="white" />
         </TouchableOpacity>
+      </View>
         <Text>{transcript}</Text>
-        <Text>{responseText}</Text>
+        {responseText !== "" &&
+          <Text>{responseText}</Text>
+        }
     </View>
   );
 }
