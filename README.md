@@ -70,7 +70,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/josephHelfenbein/HelpSignal/blob/main/helpsignal-logo.png)
 
 In a world where every second counts, we've noticed a crucial gap in emergency response. That's why we embarked on creating this app: to bridge the response time between calling for help and receiving it. Our goal is to connect CPR experts, EMTs, and medical professionals with those in need, ensuring that help arrives faster than ever.
 
@@ -209,7 +209,7 @@ Devpost link: [https://devpost.com/software/helpsignal](https://devpost.com/soft
 [license-url]: https://github.com/josephHelfenbein/HelpSignal/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: https://github.com/josephHelfenbein/HelpSignal/blob/main/product-screenshot.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React%20Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
