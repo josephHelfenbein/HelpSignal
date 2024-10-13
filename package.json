@@ -16,7 +16,11 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
+    "@react-native-async-storage/async-storage": "^2.0.0",
     "@react-navigation/native": "^6.0.2",
+    "2024-hackharvard": "file:",
+    "axios": "^1.7.7",
+    "crypto-js": "^4.2.0",
     "expo": "~51.0.28",
     "expo-constants": "~16.0.2",
     "expo-font": "~12.0.9",
@@ -37,6 +41,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@types/crypto-js": "^4.2.2",
     "@types/jest": "^29.5.12",
     "@types/react": "~18.2.45",
     "@types/react-test-renderer": "^18.0.7",
