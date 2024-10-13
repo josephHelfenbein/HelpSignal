@@ -23,7 +23,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 
@@ -58,13 +57,8 @@
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
+      <a href="#get-started">Get Started</a>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -90,6 +84,14 @@ Here's why this project matters:
 
 We understand that no single solution fits all scenarios. This app is a work in progress, and we're committed to evolving it based on feedback and real-world usage. Your insights are invaluable, so please feel free to contribute by forking this repo, submitting a pull request, or opening an issue.
 
+### How it works
+
+We used React Native and Expo Development to build the application, targeting Android for live voice transcription from expo-speech-recognition and sending the transcription after recording to Cloudflare Worker. The Cloudflare Worker then uses the BAAI general embedding model to vectorize the transcription. The categories of needed certifications or experience are in a vector database, and vector search is done to get the most relevant person for the situation.
+
+The account system is on Amazon RDS, as well as the current emergencies. After an emergency is categorized, it's put onto the database, which is called on every refresh by people with accounts and certifications. A map is shown on the page to show locations of emergencies.
+
+The backend is hosted on a separate Flask server, which can be found [here](https://github.com/YashedP/2024-hackharvard-flask).
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -103,7 +105,6 @@ We understand that no single solution fits all scenarios. This app is a work in 
 * [![Cloudflare][Cloudflare]][Cloudflare-url]
 
 Programmed in
-* [![JavaScript][JavaScript]][JavaScript-url]
 * [![TypeScript][TypeScript]][TypeScript-url]
 * [![Python][Python]][Python-url]
   
@@ -166,7 +167,13 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Joseph Helfenbein - [![linkedin][linkedin-shield]][JoeLinkedin-url]
+
+Yash Jani - [![linkedin][linkedin-shield]][YashLinkedin-url]
+
+Nghia Duong - [![linkedin][linkedin-shield]][HarryLinkedin-url]
+
+Priank Dasgupta - [![linkedin][linkedin-shield]][PriankLinkedin-url]
 
 Project Link: [https://github.com/josephHelfenbein/HelpSignal](https://github.com/josephHelfenbein/HelpSignal)
 
@@ -177,16 +184,12 @@ Project Link: [https://github.com/josephHelfenbein/HelpSignal](https://github.co
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+This project was submitted to the HackHarvard 2024 hackathon for the AllHealth track.
 
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
+Devpost link: [https://devpost.com/software/helpsignal](https://devpost.com/software/helpsignal)
+
+
+* [Best README Template](https://github.com/othneildrew/Best-README-Template)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -241,3 +244,7 @@ Use this space to list resources you find helpful and would like to give credit 
 [Cloudflare-url]: https://workers.cloudflare.com/
 [Vercel]: https://img.shields.io/badge/vercel-000000?logo=vercel&style=for-the-badge&logoColor=white
 [Vercel-url]: https://www.vercel.com/
+[JoeLinkedin-url]:https://www.linkedin.com/in/joseph-j-helfenbein/
+[YashLinkedin-url]: https://www.linkedin.com/in/yash-jani-potatoes/
+[HarryLinkedin-url]: https://www.linkedin.com/in/harrydng/
+[PriankLinkedin-url]: https://www.linkedin.com/in/priank-dasgupta
